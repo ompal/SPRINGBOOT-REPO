@@ -11,34 +11,33 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "role")
 public class Role {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
 
-    @Column(name = "role",unique=true,nullable=false)
-    private String role;
-    
-    @JsonBackReference
-    @ManyToMany(mappedBy="roles",fetch = FetchType.EAGER)
-	private List<Users> users  =  new ArrayList<>(); 
+	@Column(name = "role", unique = true, nullable = false)
+	private String role;
 
-    public List<Users> getUsers() {
+	@JsonBackReference
+	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+	private List<Users> users = new ArrayList<>();
+
+	public Role() {
+	}
+
+	public Role(Integer id, String role) {
+		this.id = id;
+		this.role = role;
+	}
+
+	public List<Users> getUsers() {
 		return users;
 	}
 
 	public void setUsers(List<Users> users) {
 		this.users = users;
 	}
-
-	public Role() {
-    }
-
-    public Role(Integer id, String role) {
-        this.id = id;
-        this.role = role;
-    }
 
 	public Integer getId() {
 		return id;
@@ -55,5 +54,5 @@ public class Role {
 	public void setRole(String role) {
 		this.role = role;
 	}
- 
-} 
+
+}

@@ -11,34 +11,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.boot.entity.Role;
-import com.example.boot.entity.Users;
-import com.example.boot.repository.RoleRepository;
+import com.example.boot.servces.IGenericService;
 
 @RestController 
 public class RoleController {
 
 	@Autowired
-	private RoleRepository roleRepository;
+	private IGenericService<Role> iGenericServiceRole;
 	
 	@PostMapping("/role")
 	public ResponseEntity<?> saveRole(@RequestBody Role role){
-		roleRepository.save(role);
+		iGenericServiceRole.create(role);
 		return new ResponseEntity<>("Role saved successfully!",HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/role")
-	public ResponseEntity<?> getAllRole(){
-		List<Role> listRole = roleRepository.findAll();
+	public ResponseEntity<?> getAllRole(Role objRole){
+		List<Role> listRole = iGenericServiceRole.fetchAll(objRole);
 		if(listRole.isEmpty()) {
 			return new ResponseEntity<>("NO role found!",HttpStatus.NO_CONTENT);
 		}
 		
-		for(Role role : listRole) {
-			System.out.println("Role -> "+role.getRole()+" : ");
-			for(Users user : role.getUsers()) {
-				System.out.println("User -> "+user.getUsername());
-			}
-		}
+		listRole.parallelStream().forEach(role -> role.getUsers().forEach(user -> user.getUsername()));
+		 
 		return new ResponseEntity<>(listRole,HttpStatus.OK);
 	}
 }
