@@ -26,7 +26,7 @@ AfterViewInit,
 AfterViewChecked,
 OnDestroy
 {
-  data:number=100;
+  data:number=0;
     constructor() {
         console.log("constructor - data is:" ,this.data);
     }
@@ -54,8 +54,8 @@ OnDestroy
     ngOnDestroy() {
         console.log("ngOnDestroy");
     }
-    fnAddNumber():void{
-        this.data+=100;
+    fnAddNumber(value:number):void{
+        this.data+=value;
     }
     deleteNumber():void{
         this.data -=10;
