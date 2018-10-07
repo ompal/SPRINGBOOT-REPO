@@ -10,6 +10,6 @@ public class BootSecurityDemoApplication {
 		SpringApplication.run(BootSecurityDemoApplication.class, args);
 		System.out.println("Testing Done Finally");
 		System.out.println("Testing Done Final");
-		System.out.println("I love programming");
+		System.out.println("I love programming,  done");
 	}
 }
