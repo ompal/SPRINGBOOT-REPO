@@ -10,5 +10,6 @@ public class BootSecurityDemoApplication {
 		SpringApplication.run(BootSecurityDemoApplication.class, args);
 		System.out.println("Testing demo, By Manav");
 		System.out.println("Test demo");
+		System.out.println("Testing Done, Infogain by Manav");
 	}
 }
